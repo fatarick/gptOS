@@ -9,6 +9,8 @@ gptOS 1.1.1: Removed resize function to number of apps, fixed wallpaper bug with
 
 gptOS 1.1.2: Added Calculator.
 
+gptOS 1.1.3: Added exit command to close terminal and added kill command to kill a task.
+
 # Files
 
 Apps Folder - Apps
@@ -23,3 +25,4 @@ index.html and style.css is known for everyone.
 # Credits
 
 Thanks for ChatGPT for the code
+
