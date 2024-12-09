@@ -16,7 +16,7 @@ Include your app’s JavaScript file in index.html using a <script> tag. The scr
 
 The createWindow function generates a new application window with a title bar, close button, and resizable functionality. The function returns an object containing the window element and a content container where you can add elements.
 
-#  Kernel Commands
+##  Kernel Commands
 
 The kernel provides several built-in commands for managing files, directories, and processes:
 	•	mkdir creates a new directory.
