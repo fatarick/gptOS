@@ -2,14 +2,32 @@ window.appRegistry = [];
 
 window.kernel = {
   registerApp: function(id, name, createFunc) {
-    window.appRegistry.push({id, name, createFunc});
+    window.appRegistry.push({ id, name, createFunc });
   },
   getApps: function() {
     return window.appRegistry;
   },
   commands: {
     'version': function(args, shell) {
-      return "gptOS version 1.1.2";
+      return "gptOS version 1.1.3";
+    },
+    'exit': function(args, shell) {
+      if (shell?.appId === 'terminal') {
+        shell.window.element.remove();
+        return "Terminal closed.";
+      } else {
+        return "exit: this command is only for the terminal.";
+      }
+    },
+    'kill': function(args, shell) {
+      if (args.length === 0) return "kill: missing process ID";
+      const appId = args[0];
+      const app = window.apps.find(app => app.id === appId);
+      if (!app) return `kill: no process found with ID '${appId}'`;
+
+      app.element.remove();
+      window.apps = window.apps.filter(a => a.id !== appId);
+      return `Process '${appId}' has been terminated.`;
     },
     'mkdir': function(args, shell) {
       if (args.length === 0) return "mkdir: missing directory name";
@@ -92,7 +110,6 @@ window.kernel = {
       if (!destParentNode || typeof destParentNode !== 'object') return `cp: cannot copy to '${args[1]}': No such directory`;
 
       let destName = destPath.substring(destPath.lastIndexOf('/') + 1);
-      // Deep copy of the node
       destParentNode[destName] = JSON.parse(JSON.stringify(sourceNode));
 
       return "";
