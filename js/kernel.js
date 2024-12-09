@@ -9,7 +9,7 @@ window.kernel = {
   },
   commands: {
     'version': function(args, shell) {
-      return "gptOS version 1.1.1";
+      return "gptOS version 1.1.2";
     },
     'mkdir': function(args, shell) {
       if (args.length === 0) return "mkdir: missing directory name";

@@ -26,7 +26,7 @@ function createAboutWindow() {
 
     // Create each line of info
     let desc1 = document.createElement('div');
-    desc1.textContent = "gptOS 1.1.1";
+    desc1.textContent = "gptOS 1.1.2";
 
     let desc2 = document.createElement('div');
     desc2.textContent = "gptOS is a simple operating system that runs in the browser. It is built using HTML, CSS, and JavaScript. It is a project by ChatGPT and Fatarick.";
