@@ -5,7 +5,7 @@ html, body {
     font-family: sans-serif;
   }
   body {
-    background: #0066cc;
+    background: url("https://blogs.windows.com/wp-content/uploads/prod/sites/2/2021/10/Windows-11-Bloom-Screensaver-Dark-scaled.jpg");
   }
   
   /* Taskbar */
@@ -61,25 +61,25 @@ html, body {
   /* Windows */
   .window {
     position:absolute;
-    background:#222;
-    border:1px solid #444;
+    background: rgba(34, 34, 34, 0.8); /* Semi-transparent black */
+    border: 1px solid rgba(68, 68, 68, 0.5); /* Semi-transparent border */
     width:400px; height:300px;
     display:flex; flex-direction:column;
     box-sizing: border-box;
     resize: both;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
   }
   .title-bar {
     height:30px; 
-    background:#333; 
+    background: rgba(96, 96, 96, 0.5);
     color:white; 
     display:flex; 
     align-items:center;
     padding:0 5px; 
     box-sizing:border-box; 
     cursor:move;
-    backdrop-filter: blur(5px);
     justify-content: space-between; /* Ensures title on the left and buttons on the right */
   }
   .title-text {

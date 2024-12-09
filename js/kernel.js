@@ -9,66 +9,93 @@ window.kernel = {
   },
   commands: {
     'version': function(args, shell) {
-      return"gptOS 1.0 Credits to chatGPT";
+      return "gptOS version 1.1 (DEVELOPER PREVIEW)";
     },
     'mkdir': function(args, shell) {
-      if (args.length===0) return "mkdir: missing directory name";
+      if (args.length === 0) return "mkdir: missing directory name";
       let dirName = args[0];
       let p = shell.fsJoin(dirName);
       if (fsGetNode(p) !== null) return "mkdir: cannot create directory, already exists";
-      let parentPath = p.substring(0,p.lastIndexOf('/')) || '/';
+      let parentPath = p.substring(0, p.lastIndexOf('/')) || '/';
       let parentNode = fsGetNode(parentPath);
-      if (!parentNode || typeof parentNode !== 'object') return "mkdir: cannot create directory at "+parentPath;
-      let dName = p.substring(p.lastIndexOf('/')+1);
+      if (!parentNode || typeof parentNode !== 'object') return "mkdir: cannot create directory at " + parentPath;
+      let dName = p.substring(p.lastIndexOf('/') + 1);
       parentNode[dName] = {};
       return "";
     },
     'rmdir': function(args, shell) {
-      if (args.length===0) return "rmdir: missing directory name";
+      if (args.length === 0) return "rmdir: missing directory name";
       let dirName = args[0];
       let p = shell.fsJoin(dirName);
       let node = fsGetNode(p);
       if (!node || typeof node !== 'object') return "rmdir: directory not found";
-      if (Object.keys(node).length>0) return "rmdir: directory not empty";
-      let parentPath = p.substring(0,p.lastIndexOf('/')) || '/';
+      if (Object.keys(node).length > 0) return "rmdir: directory not empty";
+      let parentPath = p.substring(0, p.lastIndexOf('/')) || '/';
       let parentNode = fsGetNode(parentPath);
-      let dName = p.substring(p.lastIndexOf('/')+1);
+      let dName = p.substring(p.lastIndexOf('/') + 1);
       delete parentNode[dName];
       return "";
     },
     'touch': function(args, shell) {
-      if (args.length===0) return "touch: missing file name";
+      if (args.length === 0) return "touch: missing file name";
       let fName = args[0];
       let p = shell.fsJoin(fName);
-      let parentPath = p.substring(0,p.lastIndexOf('/')) || '/';
+      let parentPath = p.substring(0, p.lastIndexOf('/')) || '/';
       let parentNode = fsGetNode(parentPath);
       if (!parentNode || typeof parentNode !== 'object') return "touch: cannot create file";
-      let fileN = p.substring(p.lastIndexOf('/')+1);
+      let fileN = p.substring(p.lastIndexOf('/') + 1);
       parentNode[fileN] = "";
       return "";
     },
     'rm': function(args, shell) {
-      if (args.length===0) return "rm: missing file name";
+      if (args.length === 0) return "rm: missing file name";
       let fName = args[0];
       let p = shell.fsJoin(fName);
       let node = fsGetNode(p);
-      if (node===null || typeof node==='object') return "rm: no such file";
-      let parentPath = p.substring(0,p.lastIndexOf('/')) || '/';
+      if (node === null || typeof node === 'object') return "rm: no such file";
+      let parentPath = p.substring(0, p.lastIndexOf('/')) || '/';
       let parentNode = fsGetNode(parentPath);
-      let fileN = p.substring(p.lastIndexOf('/')+1);
+      let fileN = p.substring(p.lastIndexOf('/') + 1);
       delete parentNode[fileN];
       return "";
     },
-    'git': function(args, shell) {
-      if (args.length===0) return "git: no command specified";
-      let subcmd = args[0];
-      if (subcmd==='status') {
-        return "On branch main\nNothing to commit, working tree clean";
-      } else if (subcmd==='commit') {
-        return "[mock commit] Changes committed successfully!";
-      } else {
-        return "git: unknown subcommand "+subcmd;
-      }
+    'mv': function(args, shell) {
+      if (args.length < 2) return "mv: missing source or destination";
+      let sourcePath = shell.fsJoin(args[0]);
+      let destPath = shell.fsJoin(args[1]);
+      let sourceNode = fsGetNode(sourcePath);
+      if (!sourceNode) return `mv: cannot stat '${args[0]}': No such file or directory`;
+
+      let destParentPath = destPath.substring(0, destPath.lastIndexOf('/')) || '/';
+      let destParentNode = fsGetNode(destParentPath);
+      if (!destParentNode || typeof destParentNode !== 'object') return `mv: cannot move to '${args[1]}': No such directory`;
+
+      let destName = destPath.substring(destPath.lastIndexOf('/') + 1);
+      destParentNode[destName] = sourceNode;
+
+      let sourceParentPath = sourcePath.substring(0, sourcePath.lastIndexOf('/')) || '/';
+      let sourceParentNode = fsGetNode(sourceParentPath);
+      let sourceName = sourcePath.substring(sourcePath.lastIndexOf('/') + 1);
+      delete sourceParentNode[sourceName];
+
+      return "";
+    },
+    'cp': function(args, shell) {
+      if (args.length < 2) return "cp: missing source or destination";
+      let sourcePath = shell.fsJoin(args[0]);
+      let destPath = shell.fsJoin(args[1]);
+      let sourceNode = fsGetNode(sourcePath);
+      if (!sourceNode) return `cp: cannot stat '${args[0]}': No such file or directory`;
+
+      let destParentPath = destPath.substring(0, destPath.lastIndexOf('/')) || '/';
+      let destParentNode = fsGetNode(destParentPath);
+      if (!destParentNode || typeof destParentNode !== 'object') return `cp: cannot copy to '${args[1]}': No such directory`;
+
+      let destName = destPath.substring(destPath.lastIndexOf('/') + 1);
+      // Deep copy of the node
+      destParentNode[destName] = JSON.parse(JSON.stringify(sourceNode));
+
+      return "";
     }
   }
 };
