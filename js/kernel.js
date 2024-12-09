@@ -9,7 +9,7 @@ window.kernel = {
   },
   commands: {
     'version': function(args, shell) {
-      return "VOS version 1.0 (HTML/JS Edition)";
+      return"gptOS 1.0 Credits to chatGPT";
     },
     'mkdir': function(args, shell) {
       if (args.length===0) return "mkdir: missing directory name";
