@@ -27,7 +27,8 @@ class Shell {
         case 'cd': return this.cmdCd(args);
         case 'cat': return this.cmdCat(args);
         case 'echo': return args.join(' ');
-        case 'help': return "Commands: ls, cd, cat, echo, help, version, mkdir, rmdir, touch, rm, git";
+        case 'version': return kernel.commands.version();
+        case 'help': return "Commands: ls, cd, cat, echo, help, version, mkdir, rmdir, touch, rm, mv, cp";
         default:
           return null;
       }
