@@ -1,0 +1,154 @@
+html, body {
+    margin: 0; padding: 0; 
+    width: 100%; height: 100%;
+    overflow: hidden;
+    font-family: sans-serif;
+  }
+  body {
+    background: #0066cc;
+  }
+  
+  /* Taskbar */
+  #taskbar {
+    position: absolute;
+    bottom: 0; left:0; right:0;
+    height: 40px;
+    background: #333;
+    display:flex;
+    align-items:center;
+    padding:0 5px;
+    box-sizing: border-box;
+  }
+  #start-button {
+    width:40px; height:30px;
+    background:#333; color:white; border:none; cursor:pointer;
+  }
+  #start-button:hover {
+    background:#444;
+  }
+  #running-apps {
+    display:flex; flex:1; align-items:center; padding:0 5px;
+  }
+  #running-apps button {
+    margin-right:5px;
+    background:#333; color:white; border:none; cursor:pointer; padding:0 10px;
+  }
+  #running-apps button:hover {
+    background:#444;
+  }
+  #clock {
+    color:white;
+  }
+  
+  /* Start menu */
+  #start-menu {
+    position:absolute;
+    bottom:40px; left:0;
+    width:200px; background:#444; color:white; display:none; 
+    box-shadow:0 0 5px rgba(0,0,0,0.5);
+    z-index:999;
+  }
+  #start-menu ul {
+    list-style:none; margin:0; padding:0;
+  }
+  #start-menu li {
+    padding:5px; cursor:pointer;
+  }
+  #start-menu li:hover {
+    background:#555;
+  }
+  
+  /* Windows */
+  .window {
+    position:absolute;
+    background:#222;
+    border:1px solid #444;
+    width:400px; height:300px;
+    display:flex; flex-direction:column;
+    box-sizing: border-box;
+    resize: both;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+  .title-bar {
+    height:30px; 
+    background:#333; 
+    color:white; 
+    display:flex; 
+    align-items:center;
+    padding:0 5px; 
+    box-sizing:border-box; 
+    cursor:move;
+    backdrop-filter: blur(5px);
+    justify-content: space-between; /* Ensures title on the left and buttons on the right */
+  }
+  .title-text {
+    flex:1; 
+    overflow:hidden;
+    white-space:nowrap; 
+    text-overflow:ellipsis;
+  }
+  .window-buttons {
+    display:flex; 
+    align-items:center; 
+    justify-content:flex-end;
+  }
+  .window-buttons button {
+    background:none; 
+    color:white; 
+    border:none; 
+    cursor:pointer; 
+    width:24px; 
+    height:24px; 
+    margin-left:5px;
+  }
+  .window-buttons button:hover {
+    background:#444;
+  }
+  .window-content {
+    flex:1; 
+    padding:5px; 
+    color:white; 
+    overflow:auto; 
+    box-sizing:border-box;
+  }
+  
+  /* Terminal */
+  .terminal-output {
+    white-space:pre-wrap;
+    font-family: monospace;
+  }
+  .terminal-input {
+    width:100%; box-sizing:border-box;
+  }
+  
+  /* Dev Env */
+  .dev-env textarea {
+    width:100%; height:150px; box-sizing:border-box;
+    background:#000; color:#0f0; font-family:monospace;
+  }
+  
+  /* Settings */
+  .color-btn {
+    background:#555; color:white; border:none; padding:5px; cursor:pointer; margin-top:5px;
+  }
+  .color-btn:hover {
+    background:#666;
+  }
+  
+  /* Context Menu */
+  .context-menu {
+    position:absolute; 
+    background:#333;
+    color:white; 
+    padding:5px; 
+    display:none; 
+    border:1px solid #444;
+    z-index:1000;
+  }
+  .context-menu li {
+    list-style:none; margin:0; padding:5px; cursor:pointer;
+  }
+  .context-menu li:hover {
+    background:#444;
+  }
