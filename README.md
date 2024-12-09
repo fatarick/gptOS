@@ -18,6 +18,8 @@ gptOS 1.1.3.1: Removed exit command because its buggy, updated shell.js (Help Co
 
 gptOS 1.2: UI Changes, Renamed Settings to Wallpaper, Terminal minor update
 
+gptOS 1.2.0.1: Changed shell.js to gptOS 1.1.3.1 version
+
 # Files
 
 Apps Folder - Apps
