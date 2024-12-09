@@ -16,6 +16,8 @@ gptOS 1.1.3: Added exit command to close terminal and added kill command to kill
 
 gptOS 1.1.3.1: Removed exit command because its buggy, updated shell.js (Help Command Output).
 
+gptOS 1.2: UI Changes, Renamed Settings to Wallpaper, Terminal minor update
+
 # Files
 
 Apps Folder - Apps
