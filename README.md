@@ -7,6 +7,8 @@ gptOS 1.1: Added Media Player, Extended File Explorer Functionalitty, Updated De
 
 gptOS 1.1.1: Removed resize function to number of apps, fixed wallpaper bug with changing it back how it was on gptOS 1.0, Removed Devoloper Preview mark in kernel command, updated shell.js to be updated about the commands.
 
+gptOS 1.1.2: Added Calculator.
+
 # Files
 
 Apps Folder - Apps
