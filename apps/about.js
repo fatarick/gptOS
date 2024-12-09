@@ -26,7 +26,7 @@ function createAboutWindow() {
 
     // Create each line of info
     let desc1 = document.createElement('div');
-    desc1.textContent = "gptOS 1.1";
+    desc1.textContent = "gptOS 1.1.1";
 
     let desc2 = document.createElement('div');
     desc2.textContent = "gptOS is a simple operating system that runs in the browser. It is built using HTML, CSS, and JavaScript. It is a project by ChatGPT and Fatarick.";
@@ -37,13 +37,11 @@ function createAboutWindow() {
     let desc4 = document.createElement('div');
     desc4.textContent = "(C) 2024 ChatGPT, Fatarick";
 
-    let desc5 = document.createElement('div');
-    desc5.textContent = "Credits to Microsoft for the Wallpaper";
-
     // Append the lines to the main description container
     desc.appendChild(desc1);
     desc.appendChild(desc2);
     desc.appendChild(desc3);
+    desc.appendChild(desc4);
 
     // Append the container to the window content
     w.content.appendChild(desc);

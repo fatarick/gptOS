@@ -5,9 +5,8 @@ html, body {
     font-family: sans-serif;
   }
   body {
-    background: url("https://blogs.windows.com/wp-content/uploads/prod/sites/2/2021/10/Windows-11-Bloom-Screensaver-Dark-scaled.jpg");
+    background: #1c72c2;
   }
-  
   /* Taskbar */
   #taskbar {
     position: absolute;
