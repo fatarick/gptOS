@@ -12,15 +12,18 @@ html, body {
     position: absolute;
     bottom: 0; left:0; right:0;
     height: 40px;
-    background: #333;
+    background: rgba(34, 34, 34, 0.8); /* Semi-transparent black */
+    backdrop-filter: blur(5px);
     display:flex;
     align-items:center;
     padding:0 5px;
     box-sizing: border-box;
   }
   #start-button {
+    position: absolute;
     width:40px; height:30px;
     background:#333; color:white; border:none; cursor:pointer;
+    left: 0.5%;
   }
   #start-button:hover {
     background:#444;
@@ -46,6 +49,12 @@ html, body {
     width:200px; background:#444; color:white; display:none; 
     box-shadow:0 0 5px rgba(0,0,0,0.5);
     z-index:999;
+    background: rgba(34, 34, 34, 0.8);
+    backdrop-filter: blur(5px);
+    left: 0.5%;
+    bottom: 6%;
+    border-radius: 10px;
+    font-size: large;
   }
   #start-menu ul {
     list-style:none; margin:0; padding:0;
@@ -73,6 +82,8 @@ html, body {
   .title-bar {
     height:30px; 
     background: rgba(96, 96, 96, 0.5);
+    backdrop-filter: blur(5px);
+
     color:white; 
     display:flex; 
     align-items:center;
@@ -121,11 +132,6 @@ html, body {
     width:100%; box-sizing:border-box;
   }
   
-  /* Dev Env */
-  .dev-env textarea {
-    width:100%; height:150px; box-sizing:border-box;
-    background:#000; color:#0f0; font-family:monospace;
-  }
   
   /* Settings */
   .color-btn {
