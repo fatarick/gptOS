@@ -9,15 +9,7 @@ window.kernel = {
   },
   commands: {
     'version': function(args, shell) {
-      return "gptOS version 1.1.3";
-    },
-    'exit': function(args, shell) {
-      if (shell?.appId === 'terminal') {
-        shell.window.element.remove();
-        return "Terminal closed.";
-      } else {
-        return "exit: this command is only for the terminal.";
-      }
+      return "gptOS version 1.1.3.1";
     },
     'kill': function(args, shell) {
       if (args.length === 0) return "kill: missing process ID";
