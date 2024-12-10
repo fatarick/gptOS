@@ -1,5 +1,5 @@
 window.appRegistry = []; 
-var version = '1.2.1.1';
+var version = '1.2.2';
 
 window.kernel = {
   registerApp: function(id, name, createFunc) {
