@@ -16,11 +16,13 @@ gptOS 1.1.3: Added exit command to close terminal and added kill command to kill
 
 gptOS 1.1.3.1: Removed exit command because its buggy, updated shell.js (Help Command Output).
 
-gptOS 1.2: UI Changes, Renamed Settings to Wallpaper, Terminal minor update
+gptOS 1.2: UI Changes, Renamed Settings to Wallpaper, Terminal minor update.
 
-gptOS 1.2.0.1: Changed shell.js to gptOS 1.1.3.1 version
+gptOS 1.2.0.1: Changed shell.js to gptOS 1.1.3.1 version.
 
-gptOS 1.2.0.2: Start Menu font size is even larger
+gptOS 1.2.0.2: Start Menu font size is even larger.
+
+gptOS 1.3.1: Fixed opened apps appearance bug, Make the start button logo bigger.
 
 # Files
 
