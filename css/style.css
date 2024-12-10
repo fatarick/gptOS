@@ -25,6 +25,7 @@ html, body {
     background:#333; color:white; border:none; cursor:pointer;
     left: 0.5%;
     font-size: larger;
+    border-radius: 5px;
   }
   #start-button:hover {
     background:#444;
