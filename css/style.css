@@ -24,12 +24,15 @@ html, body {
     width:40px; height:30px;
     background:#333; color:white; border:none; cursor:pointer;
     left: 0.5%;
+    font-size: larger;
   }
   #start-button:hover {
     background:#444;
   }
   #running-apps {
-    display:flex; flex:1; align-items:center; padding:0 5px;
+    position: absolute;
+    display:flex; flex:1; align-items:center; padding:0 6px;
+    left: 3%;
   }
   #running-apps button {
     margin-right:6px;
@@ -40,6 +43,8 @@ html, body {
   }
   #clock {
     color:white;
+    position: absolute;
+    right: 0.5%;
   }
   
   /* Start menu */
@@ -54,7 +59,7 @@ html, body {
     left: 0.5%;
     bottom: 6%;
     border-radius: 10px;
-    font-size: larger;
+    font-size: large;
   }
   #start-menu ul {
     list-style:none; margin:0; padding:0;
