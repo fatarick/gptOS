@@ -1,27 +1,19 @@
-window.appRegistry = [];
-const version = '1.2.2';
+window.appRegistry = []; 
+var version = '1.2.1.1';
 
 window.kernel = {
-  version: version,
-
-  // Register a new application
-  registerApp: function (id, name, createFunc) {
-    this.appRegistry.push({ id, name, createFunc });
+  registerApp: function(id, name, createFunc) {
+    window.appRegistry.push({ id, name, createFunc });
   },
-
-  // Get a list of registered applications
-  getApps: function () {
-    return this.appRegistry;
+  getApps: function() {
+    return window.appRegistry;
   },
-
+  
   commands: {
-    // Display gptOS version
-    'version': function (args, shell) {
-      return "gptOS version " + kernel.version;
+    'version': function(args, shell) {
+      return "gptOS version " + version;
     },
-
-    // Kill a process by its ID
-    'kill': function (args, shell) {
+    'kill': function(args, shell) {
       if (args.length === 0) return "kill: missing process ID";
       const appId = args[0];
       const app = window.apps.find(app => app.id === appId);
@@ -31,9 +23,7 @@ window.kernel = {
       window.apps = window.apps.filter(a => a.id !== appId);
       return `Process '${appId}' has been terminated.`;
     },
-
-    // Create a new directory
-    'mkdir': function (args, shell) {
+    'mkdir': function(args, shell) {
       if (args.length === 0) return "mkdir: missing directory name";
       let dirName = args[0];
       let p = shell.fsJoin(dirName);
@@ -45,9 +35,7 @@ window.kernel = {
       parentNode[dName] = {};
       return "";
     },
-
-    // Remove an empty directory
-    'rmdir': function (args, shell) {
+    'rmdir': function(args, shell) {
       if (args.length === 0) return "rmdir: missing directory name";
       let dirName = args[0];
       let p = shell.fsJoin(dirName);
@@ -60,9 +48,7 @@ window.kernel = {
       delete parentNode[dName];
       return "";
     },
-
-    // Create a new file
-    'touch': function (args, shell) {
+    'touch': function(args, shell) {
       if (args.length === 0) return "touch: missing file name";
       let fName = args[0];
       let p = shell.fsJoin(fName);
@@ -73,46 +59,19 @@ window.kernel = {
       parentNode[fileN] = "";
       return "";
     },
-
-    // Remove a file or directory with support for -rf
-    'rm': function (args, shell) {
-      if (args.length === 0) return "rm: missing file or directory name";
-
-      const flags = args.filter(arg => arg.startsWith('-'));
-      const targets = args.filter(arg => !arg.startsWith('-'));
-
-      if (targets.length === 0) return "rm: missing file or directory name";
-
-      const recursive = flags.includes('-rf');
-      let result = "";
-
-      targets.forEach(target => {
-        let p = shell.fsJoin(target);
-        let node = fsGetNode(p);
-
-        if (!node) {
-          result += `rm: cannot remove '${target}': No such file or directory\n`;
-        } else if (typeof node === 'object' && !recursive) {
-          result += `rm: cannot remove '${target}': Is a directory\n`;
-        } else {
-          let parentPath = p.substring(0, p.lastIndexOf('/')) || '/';
-          let parentNode = fsGetNode(parentPath);
-          let name = p.substring(p.lastIndexOf('/') + 1);
-
-          if (parentNode && typeof parentNode === 'object') {
-            delete parentNode[name];
-            result += `Removed '${target}'\n`;
-          } else {
-            result += `rm: cannot remove '${target}': Permission denied\n`;
-          }
-        }
-      });
-
-      return result.trim();
+    'rm': function(args, shell) {
+      if (args.length === 0) return "rm: missing file name";
+      let fName = args[0];
+      let p = shell.fsJoin(fName);
+      let node = fsGetNode(p);
+      if (node === null || typeof node === 'object') return "rm: no such file";
+      let parentPath = p.substring(0, p.lastIndexOf('/')) || '/';
+      let parentNode = fsGetNode(parentPath);
+      let fileN = p.substring(p.lastIndexOf('/') + 1);
+      delete parentNode[fileN];
+      return "";
     },
-
-    // Move a file or directory
-    'mv': function (args, shell) {
+    'mv': function(args, shell) {
       if (args.length < 2) return "mv: missing source or destination";
       let sourcePath = shell.fsJoin(args[0]);
       let destPath = shell.fsJoin(args[1]);
@@ -133,9 +92,7 @@ window.kernel = {
 
       return "";
     },
-
-    // Copy a file or directory
-    'cp': function (args, shell) {
+    'cp': function(args, shell) {
       if (args.length < 2) return "cp: missing source or destination";
       let sourcePath = shell.fsJoin(args[0]);
       let destPath = shell.fsJoin(args[1]);
