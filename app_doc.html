@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>gptOS Developer Documentation | gptOS</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="gptOS Developer Documentation" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I got bored and i asked chatGPT o1 to create me an OS simulation in python then i asked him to rewrite this into web. This is the Web version." />
+<meta property="og:description" content="I got bored and i asked chatGPT o1 to create me an OS simulation in python then i asked him to rewrite this into web. This is the Web version." />
+<link rel="canonical" href="https://fatarick.github.io/gptOS/app_doc.html" />
+<meta property="og:url" content="https://fatarick.github.io/gptOS/app_doc.html" />
+<meta property="og:site_name" content="gptOS" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="gptOS Developer Documentation" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"I got bored and i asked chatGPT o1 to create me an OS simulation in python then i asked him to rewrite this into web. This is the Web version.","headline":"gptOS Developer Documentation","url":"https://fatarick.github.io/gptOS/app_doc.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/gptOS/assets/css/style.css?v=759c9d0af3ff9904cef35a633038126ad15a27f9">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/gptOS/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://fatarick.github.io/gptOS/">gptOS</a></h1>
+      
+
+      <h1 id="gptos-developer-documentation">gptOS Developer Documentation</h1>
+
+<p>This guide explains how to create applications for gptOS, including how to use the available features and integrate your app into the system.</p>
+
+<h2 id="overview-of-gptos-app-development">Overview of gptOS App Development</h2>
+
+<p>Applications in gptOS are modular and written in JavaScript. Each app interacts with the system’s kernel, virtual file system, and window manager. Apps are registered with the kernel, which manages launching, window creation, and system integration.</p>
+
+<h2 id="writing-a-gptos-app">Writing a gptOS App</h2>
+
+<p>To create an app, write a JavaScript file that registers the app with the kernel and defines its functionality. Use the kernel.registerApp function to give the app a unique ID, a display name, and a function that creates the app’s window.</p>
+
+<p>Include your app’s JavaScript file in index.html using a <script> tag. The script should be added after the kernel script to ensure proper loading.</script></p>
+
+<h2 id="window-management">Window Management</h2>
+
+<p>The createWindow function generates a new application window with a title bar, close button, and resizable functionality. The function returns an object containing the window element and a content container where you can add elements.</p>
+
+<h2 id="kernel-commands">Kernel Commands</h2>
+
+<p>The kernel provides several built-in commands for managing files, directories, and processes:
+	•	mkdir creates a new directory.
+	•	rmdir removes an empty directory.
+	•	touch creates an empty file.
+	•	rm deletes a file.
+	•	mv moves a file or directory.
+	•	cp copies a file or directory.
+	•	exit closes the terminal window.
+	•	kill terminates a process by its ID.</p>
+
+<h2 id="file-system-utilities">File System Utilities</h2>
+
+<p>gptOS provides utilities for file operations. Use fsListDir to list the contents of a directory, fsReadFile to read file contents, and fsWriteFile to write or create files. Use fsDeleteFile to delete a file and fsGetNode to retrieve a directory or file node.</p>
+
+<h2 id="inter-app-communication">Inter-App Communication</h2>
+
+<p>Applications can interact with others by fetching their references from the kernel and invoking their functions. This allows for app integration and enhanced functionality.</p>
+
+<h2 id="example-workflow">Example Workflow</h2>
+
+<p>Write your app in a JavaScript file and register it with the kernel. Use createWindow to set up the app’s interface. Include the script in index.html and test the app by launching it in gptOS.</p>
+
+<p>This documentation explains the key aspects of gptOS app development, enabling you to create functional and integrated applications.</p>
+
+<p>Credits for ChatGPT for documentation.</p>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/fatarick/gptOS/edit/main/app_doc.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>
