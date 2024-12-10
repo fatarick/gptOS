@@ -24,7 +24,7 @@ gptOS 1.2.0.2: Start Menu font size is even larger.
 
 gptOS 1.2.1: Fixed opened apps appearance bug, Make the start button logo bigger.
 
-gptOS 1.2.1.1: Gave to start button rounded corners
+gptOS 1.2.1.1: Gave to start button rounded corners.
 
 # Files
 
