@@ -2,9 +2,6 @@ kernel.registerApp('settings','Settings', function() {
     return createSettingsWindow();
   });
   
-  w.element.style.resize = 'none'; // Disable resizing
-  w.element.style.overflow = 'hidden'; // Prevent showing resize handles
-
   function createSettingsWindow() {
     const w=createWindow("Settings");
   
