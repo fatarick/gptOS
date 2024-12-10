@@ -34,10 +34,10 @@ function createAboutWindow() {
     desc2.textContent = "gptOS is a simple operating system that runs in the browser. It is built using HTML, CSS, and JavaScript. It is a project by ChatGPT and Fatarick.";
 
     let desc3 = document.createElement('div');
-    desc3.textContent = "Code: ChatGPT | Creative: Fatarick";
+    desc3.textContent = "Code: ChatGPT, Fatarick | Creative: Fatarick";
 
     let desc4 = document.createElement('div');
-    desc4.textContent = "(C) 2024 ChatGPT, Fatarick";
+    desc4.textContent = "(C) 2024 Fatarick";
 
     // Append the lines to the main description container
     desc.appendChild(desc1);
