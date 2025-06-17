@@ -2,7 +2,7 @@ kernel.registerApp('about', 'About', function () {
     return createAboutWindow();
 });
 
-var version = "Beta";
+var version = "1.3";
 
 function createAboutWindow() {
     const w = createWindow("About");
