@@ -2,7 +2,7 @@ kernel.registerApp('about', 'About', function () {
     return createAboutWindow();
 });
 
-var version = "1.2.2";
+var version = "Beta";
 
 function createAboutWindow() {
     const w = createWindow("About");
@@ -31,13 +31,13 @@ function createAboutWindow() {
     desc1.textContent = "gptOS " + version;
 
     let desc2 = document.createElement('div');
-    desc2.textContent = "gptOS is a simple operating system that runs in the browser. It is built using HTML, CSS, and JavaScript. It is a project by ChatGPT and Fatarick.";
+    desc2.textContent = "gptOS is a simple operating system that runs in the browser. It is built using HTML, CSS, and JavaScript. It is a project by ChatGPT, Google Gemini and Fatarick.";
 
     let desc3 = document.createElement('div');
-    desc3.textContent = "Code: ChatGPT, Fatarick | Creative: Fatarick";
+    desc3.textContent = "Code: ChatGPT, Google Gemini, Fatarick | Creative: Fatarick";
 
     let desc4 = document.createElement('div');
-    desc4.textContent = "(C) 2024 Fatarick";
+    desc4.textContent = "(C) 2025 Fatarick";
 
     // Append the lines to the main description container
     desc.appendChild(desc1);
