@@ -1,165 +1,241 @@
-html, body {
-    margin: 0; padding: 0; 
-    width: 100%; height: 100%;
-    overflow: hidden;
-    font-family: sans-serif;
-  }
-  body {
-    background: #1c72c2;
-  }
-  /* Taskbar */
-  #taskbar {
-    position: absolute;
-    bottom: 0; left:0; right:0;
-    height: 40px;
-    background: rgba(34, 34, 34, 0.8); /* Semi-transparent black */
-    backdrop-filter: blur(5px);
-    display:flex;
-    align-items:center;
-    padding:0 5px;
-    box-sizing: border-box;
-  }
-  #start-button {
-    position: absolute;
-    width:40px; height:30px;
-    background:#333; color:white; border:none; cursor:pointer;
-    left: 0.5%;
-    font-size: larger;
-    border-radius: 5px;
-  }
-  #start-button:hover {
-    background:#444;
-  }
-  #running-apps {
-    position: absolute;
-    display:flex; flex:1; align-items:center; padding:0 6px;
-    left: 3%;
-  }
-  #running-apps button {
-    margin-right:6px;
-    background:#333; color:white; border:none; cursor:pointer; padding:0 10px;
-  }
-  #running-apps button:hover {
-    background:#444;
-  }
-  #clock {
-    color:white;
-    position: absolute;
-    right: 0.5%;
-  }
-  
-  /* Start menu */
-  #start-menu {
-    position:absolute;
-    bottom:40px; left:0;
-    width:200px; background:#444; color:white; display:none; 
-    box-shadow:0 0 5px rgba(0,0,0,0.5);
-    z-index:999;
-    background: rgba(34, 34, 34, 0.8);
-    backdrop-filter: blur(5px);
-    left: 0.5%;
-    bottom: 6%;
-    border-radius: 10px;
-    font-size: large;
-  }
-  #start-menu ul {
-    list-style:none; margin:0; padding:0;
-  }
-  #start-menu li {
-    padding:5px; cursor:pointer;
-  }
-  #start-menu li:hover {
-    background:#555;
-  }
-  
-  /* Windows */
-  .window {
-    position:absolute;
-    background: rgba(34, 34, 34, 0.8); /* Semi-transparent black */
-    border: 1px solid rgba(68, 68, 68, 0.5); /* Semi-transparent border */
-    width:400px; height:300px;
-    display:flex; flex-direction:column;
-    box-sizing: border-box;
-    resize: both;
-    overflow: hidden;
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-  }
-  .title-bar {
-    height:30px; 
-    background: rgba(96, 96, 96, 0.5);
-    backdrop-filter: blur(5px);
+/* --- Modern UI Style for gptOS --- */
 
-    color:white; 
-    display:flex; 
-    align-items:center;
-    padding:0 5px; 
-    box-sizing:border-box; 
-    cursor:move;
-    justify-content: space-between; /* Ensures title on the left and buttons on the right */
-  }
-  .title-text {
-    flex:1; 
-    overflow:hidden;
-    white-space:nowrap; 
-    text-overflow:ellipsis;
-  }
-  .window-buttons {
-    display:flex; 
-    align-items:center; 
-    justify-content:flex-end;
-  }
-  .window-buttons button {
-    background:none; 
-    color:white; 
-    border:none; 
-    cursor:pointer; 
-    width:24px; 
-    height:24px; 
-    margin-left:5px;
-  }
-  .window-buttons button:hover {
-    background:#444;
-  }
-  .window-content {
-    flex:1; 
-    padding:5px; 
-    color:white; 
-    overflow:auto; 
-    box-sizing:border-box;
-  }
-  
-  /* Terminal */
-  .terminal-output {
-    white-space:pre-wrap;
-    font-family: monospace;
-  }
-  .terminal-input {
-    width:100%; box-sizing:border-box;
-  }
-  
-  
-  /* Settings */
-  .color-btn {
-    background:#555; color:white; border:none; padding:5px; cursor:pointer; margin-top:5px;
-  }
-  .color-btn:hover {
-    background:#666;
-  }
-  
-  /* Context Menu */
-  .context-menu {
-    position:absolute; 
-    background:#333;
-    color:white; 
-    padding:5px; 
-    display:none; 
-    border:1px solid #444;
-    z-index:1000;
-  }
-  .context-menu li {
-    list-style:none; margin:0; padding:5px; cursor:pointer;
-  }
-  .context-menu li:hover {
-    background:#444;
-  }
+/* 1. Global Styles & Variables */
+:root {
+  --background-url: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop');
+  --base-bg-color: rgba(25, 25, 30, 0.6);
+  --glass-bg-color: rgba(45, 45, 55, 0.7);
+  --hover-bg-color: rgba(70, 70, 85, 0.8);
+  --text-color: #f0f0f0;
+  --accent-color: #0099ff;
+  --border-color: rgba(255, 255, 255, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --font-family: 'Roboto', sans-serif;
+  --border-radius: 12px;
+  --transition-speed: 0.2s;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
+
+body {
+  background: var(--background-url) no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* 2. Taskbar */
+#taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: var(--base-bg-color);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+#start-button {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  background: transparent;
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background var(--transition-speed) ease;
+}
+
+#start-button:hover {
+  background: var(--hover-bg-color);
+}
+
+#running-apps {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 0 10px;
+  gap: 6px;
+}
+
+#running-apps button {
+  background: var(--glass-bg-color);
+  color: var(--text-color);
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all var(--transition-speed) ease;
+  font-weight: 500;
+}
+
+#running-apps button:hover {
+  background: var(--hover-bg-color);
+  border-color: var(--accent-color);
+}
+
+#clock {
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 0 10px;
+}
+
+/* 3. Start Menu */
+#start-menu {
+  position: absolute;
+  bottom: 55px;
+  left: 10px;
+  width: 250px;
+  background: var(--glass-bg-color);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px 0 var(--shadow-color);
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(10px);
+  visibility: hidden;
+  transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+#start-menu.open {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+#start-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+}
+
+#start-menu li {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background var(--transition-speed) ease;
+  font-weight: 500;
+}
+
+#start-menu li:hover {
+  background: var(--hover-bg-color);
+}
+
+/* 4. Windows */
+.window {
+  position: absolute;
+  width: 500px;
+  height: 400px;
+  background: var(--glass-bg-color);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px 0 var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  resize: both;
+  overflow: hidden;
+  min-width: 250px;
+  min-height: 150px;
+}
+
+.title-bar {
+  height: 40px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  box-sizing: border-box;
+  cursor: move;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.title-text {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.window-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.window-buttons button {
+  background: none;
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 32px;
+  text-align: center;
+  transition: background var(--transition-speed) ease;
+}
+
+.window-buttons button:hover {
+  background: var(--hover-bg-color);
+}
+
+.window-buttons button.close-btn:hover {
+  background: #e81123; /* Red for close button hover */
+}
+
+.window-content {
+  flex: 1;
+  padding: 15px;
+  color: var(--text-color);
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+/* 5. Generic Controls */
+.window-content button, .color-btn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: transform var(--transition-speed) ease, background var(--transition-speed) ease;
+}
+
+.window-content button:hover, .color-btn:hover {
+  background: #007acc;
+  transform: translateY(-1px);
+}
+
+.window-content input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
