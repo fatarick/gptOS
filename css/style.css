@@ -1,6 +1,6 @@
-/* --- Modern UI Style for gptOS --- */
+/* --- Modern & Safe UI Style for gptOS --- */
 
-/* 1. Global Styles & Variables */
+/* 1. Global Styles & Modern Color Scheme using CSS Variables */
 :root {
   --background-url: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop');
   --base-bg-color: rgba(25, 25, 30, 0.6);
@@ -10,7 +10,7 @@
   --accent-color: #0099ff;
   --border-color: rgba(255, 255, 255, 0.2);
   --shadow-color: rgba(0, 0, 0, 0.4);
-  --font-family: 'Roboto', sans-serif;
+  --font-family: 'Roboto', sans-serif; /* Uses Roboto, falls back to sans-serif */
   --border-radius: 12px;
   --transition-speed: 0.2s;
 }
@@ -30,25 +30,24 @@ body {
   background-size: cover;
 }
 
-/* 2. Taskbar */
+
+/* 2. Taskbar - Modernized but keeps original layout */
 #taskbar {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   height: 48px;
   background: var(--base-bg-color);
   backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-top: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   padding: 0 10px;
   box-sizing: border-box;
-  justify-content: space-between;
 }
 
 #start-button {
+  position: absolute; /* Kept from original for JS compatibility */
+  left: 0.5%;
   width: 40px;
   height: 40px;
   font-size: 20px;
@@ -65,10 +64,11 @@ body {
 }
 
 #running-apps {
+  position: absolute; /* Kept from original */
+  left: 55px; /* Adjusted to not overlap start button */
   display: flex;
-  flex: 1;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 6px;
   gap: 6px;
 }
 
@@ -91,10 +91,11 @@ body {
 #clock {
   color: var(--text-color);
   font-weight: 500;
-  padding: 0 10px;
+  position: absolute; /* Kept from original */
+  right: 1%;
 }
 
-/* 3. Start Menu */
+/* 3. Start Menu - Visually updated */
 #start-menu {
   position: absolute;
   bottom: 55px;
@@ -102,21 +103,12 @@ body {
   width: 250px;
   background: var(--glass-bg-color);
   backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: 0 8px 32px 0 var(--shadow-color);
   z-index: 999;
-  opacity: 0;
-  transform: translateY(10px);
-  visibility: hidden;
+  display: none; /* JS will change this to 'block', which is fine */
   transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
-}
-
-#start-menu.open {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
 }
 
 #start-menu ul {
@@ -137,23 +129,27 @@ body {
   background: var(--hover-bg-color);
 }
 
-/* 4. Windows */
+/* 4. Windows - Modern look, still resizable by default */
 .window {
   position: absolute;
   width: 500px;
   height: 400px;
   background: var(--glass-bg-color);
   backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: 0 8px 32px 0 var(--shadow-color);
   display: flex;
   flex-direction: column;
-  resize: both;
+  resize: both; /* Kept so JS can override it if needed */
   overflow: hidden;
   min-width: 250px;
   min-height: 150px;
+}
+
+/* A helper class to disable resizing, as we discussed */
+.window.no-resize {
+  resize: none;
 }
 
 .title-bar {
@@ -162,7 +158,7 @@ body {
   color: var(--text-color);
   display: flex;
   align-items: center;
-  padding: 0 15px;
+  padding: 0 5px 0 15px;
   box-sizing: border-box;
   cursor: move;
   justify-content: space-between;
@@ -212,8 +208,26 @@ body {
   box-sizing: border-box;
 }
 
-/* 5. Generic Controls */
-.window-content button, .color-btn {
+/* 5. Terminal & Other Controls - Minor modern tweaks */
+.terminal-output {
+  white-space: pre-wrap;
+  font-family: monospace;
+}
+
+.terminal-input,
+.window-content input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.color-btn,
+.window-content button {
   background: var(--accent-color);
   color: white;
   border: none;
@@ -224,18 +238,8 @@ body {
   transition: transform var(--transition-speed) ease, background var(--transition-speed) ease;
 }
 
-.window-content button:hover, .color-btn:hover {
+.color-btn:hover,
+.window-content button:hover {
   background: #007acc;
   transform: translateY(-1px);
-}
-
-.window-content input[type="text"] {
-  width: 100%;
-  padding: 8px 10px;
-  box-sizing: border-box;
-  border: 1px solid var(--border-color);
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  color: var(--text-color);
-  margin-bottom: 10px;
 }
