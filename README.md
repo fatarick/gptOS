@@ -28,6 +28,8 @@ gptOS 1.2.1.1: Gave to start button rounded corners.
 
 gptOS 1.2.2: Added Images app.
 
+gptOS 1.3: Updated UI. No Functional Changes
+
 # Files
 
 Apps Folder - Apps
