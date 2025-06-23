@@ -3,6 +3,7 @@ kernel.registerApp('about', 'About', function () {
 });
 
 var version = "1.3";
+var build = "16";
 
 function createAboutWindow() {
     const w = createWindow("About");
@@ -29,6 +30,9 @@ function createAboutWindow() {
     // Create each line of info
     let desc1 = document.createElement('div');
     desc1.textContent = "gptOS " + version;
+
+    let buildText = document.createElement('div');
+    buildText.textContent = "Build " + build;
 
     let desc2 = document.createElement('div');
     desc2.textContent = "gptOS is a simple operating system that runs in the browser. It is built using HTML, CSS, and JavaScript. It is a project by ChatGPT, Google Gemini and Fatarick.";
