@@ -1,5 +1,6 @@
 window.appRegistry = []; 
-var version = '1.2.2';
+var version = '1.3';
+var build = "16";
 
 window.kernel = {
   registerApp: function(id, name, createFunc) {
@@ -11,7 +12,7 @@ window.kernel = {
   
   commands: {
     'version': function(args, shell) {
-      return "gptOS version " + version;
+      return "gptOS version " + version + ". Build " + build;
     },
     'kill': function(args, shell) {
       if (args.length === 0) return "kill: missing process ID";
