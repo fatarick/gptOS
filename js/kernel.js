@@ -1,7 +1,7 @@
 window.appRegistry = []; 
-var version = '1.3.2';
-var build = "17";
-var kernelVer = "2.2"
+var version = '1.3.2.1';
+var build = "18";
+var kernelVer = "2.2.1"
 
 window.kernel = {
   registerApp: function(id, name, createFunc) {
@@ -14,7 +14,6 @@ window.kernel = {
   commands: {
     'version': function(args, shell) {
       return "gptOS version " + version + ". Build " + build;
-      return "gptKernel version" + kernelVer
     },
     'uname': function(args, shell) {
       return "gptOS " + version + " " + build + " gptKernel " + kernelVer
