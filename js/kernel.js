@@ -16,7 +16,7 @@ window.kernel = {
       return "gptOS version " + version + ". Build " + build;
     },
     'uname': function(args, shell) {
-      return "gptOS " + version + " " + build + " gptKernel " + kernelVer
+      return "gptOS " + version + " " + build + " gptKernel " + kernelVer;
     },
     'kill': function(args, shell) {
       if (args.length === 0) return "kill: missing process ID";
