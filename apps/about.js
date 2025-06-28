@@ -2,9 +2,9 @@ kernel.registerApp('about', 'About', function () {
     return createAboutWindow();
 });
 
-var version = "1.3.2";
-var build = "17";
-var kernelVer = "2.2";
+var version = "1.3.2.1";
+var build = "18";
+var kernelVer = "2.2.1";
 
 function createAboutWindow() {
     const w = createWindow("About");
