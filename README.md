@@ -36,6 +36,8 @@ gptOS 1.3 BETA (Build 15): Added Build System. Fixed Branding Issues
 
 gptOS 1.3.1 (Build 16): Release Build of Build 15
 
+gptOS 1.3.2 (Build 17): Add Kernel Info. New uname command.
+
 # Files
 
 Apps Folder - Apps
