@@ -40,6 +40,8 @@ gptOS 1.3.2 (Build 17): Add Kernel Info. New uname command.
 
 gptOS 1.3.2.1 (Build 18): Fix a syntax error that crashed the entire OS.
 
+gptOS 3.2.2 (Build 19): Remake the versioning method
+
 # Files
 
 Apps Folder - Apps
