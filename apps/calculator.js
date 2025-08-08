@@ -2,6 +2,76 @@ kernel.registerApp('calculator', 'Calculator', function () {
     return createCalculatorWindow();
 });
 
+function evaluateExpression(expr) {
+    if (!/^[0-9+\-*/.]+$/.test(expr)) {
+        throw new Error('Invalid characters');
+    }
+
+    const ops = [];
+    const values = [];
+    const precedence = { '+': 1, '-': 1, '*': 2, '/': 2 };
+
+    const applyOp = () => {
+        const b = values.pop();
+        const a = values.pop();
+        const op = ops.pop();
+        let result;
+        switch (op) {
+            case '+':
+                result = a + b;
+                break;
+            case '-':
+                result = a - b;
+                break;
+            case '*':
+                result = a * b;
+                break;
+            case '/':
+                result = a / b;
+                break;
+            default:
+                throw new Error('Unknown operator');
+        }
+        values.push(result);
+    };
+
+    let num = '';
+    for (let i = 0; i < expr.length; i++) {
+        const ch = expr[i];
+        if (/\d|\./.test(ch)) {
+            num += ch;
+        } else if (precedence[ch]) {
+            if (num === '' && ch === '-' && (i === 0 || precedence[expr[i - 1]])) {
+                num = '-';
+                continue;
+            }
+            if (num === '' || num === '-') {
+                throw new Error('Invalid expression');
+            }
+            values.push(parseFloat(num));
+            num = '';
+            while (ops.length && precedence[ops[ops.length - 1]] >= precedence[ch]) {
+                applyOp();
+            }
+            ops.push(ch);
+        } else {
+            throw new Error('Invalid character');
+        }
+    }
+
+    if (num === '' || num === '-') {
+        throw new Error('Invalid expression');
+    }
+    values.push(parseFloat(num));
+    while (ops.length) {
+        applyOp();
+    }
+    if (values.length !== 1 || isNaN(values[0])) {
+        throw new Error('Invalid expression');
+    }
+    return values[0];
+}
+
 function createCalculatorWindow() {
     const w = createWindow("Calculator");
 
@@ -59,12 +129,12 @@ function createCalculatorWindow() {
             } else if (btnText === '=') {
                 // Evaluate the expression
                 try {
-                    display.value = eval(display.value) || '';
+                    display.value = evaluateExpression(display.value).toString();
                 } catch {
                     display.value = 'Error';
                 }
-            } else {
-                // Append the button text to the display
+            } else if (/^[0-9+\-*/.]$/.test(btnText)) {
+                // Append the button text to the display if valid
                 display.value += btnText;
             }
         };
