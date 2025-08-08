@@ -54,3 +54,28 @@ const fs = {
       dnode[fname] = content;
     }
   }
+
+  function fsDeleteFile(path) {
+    let parts = path.split('/').filter(p=>p);
+    let fname = parts.pop();
+    let dirpath = '/' + parts.join('/');
+    if (dirpath === '') dirpath = '/';
+    let dnode = fsGetNode(dirpath);
+    if (!dnode || typeof dnode !== 'object' || !(fname in dnode)) {
+      console.error('fsDeleteFile: path not found', path);
+      return false;
+    }
+    delete dnode[fname];
+    return true;
+  }
+
+  if (typeof module !== 'undefined') {
+    module.exports = {
+      fsGetNode,
+      fsIsDir,
+      fsListDir,
+      fsReadFile,
+      fsWriteFile,
+      fsDeleteFile
+    };
+  }

@@ -1,3 +1,6 @@
+const { fsGetNode, fsIsDir, fsListDir, fsReadFile, fsWriteFile, fsDeleteFile } =
+  typeof require !== 'undefined' ? require('../js/fs.js') : window;
+
 kernel.registerApp('fileexplorer', 'File Explorer', function (shell) {
   return createFileExplorerWindow(shell);
 });
