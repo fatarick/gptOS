@@ -1,3 +1,5 @@
+import { createWindow, closeAppByElement } from '../js/main.js';
+
 // Register the Task Manager application
 kernel.registerApp('taskmanager', 'Task Manager', function () {
   return createTaskManagerWindow();
@@ -99,61 +101,4 @@ function createTaskManagerWindow() {
   taskManagerWindowObj.startChecking();
 
   return taskManagerWindowObj;
-}
-
-// Close an app by removing its element and reference
-function closeAppByElement(element) {
-  // Remove the app's DOM element
-  element.remove();
-
-  // Remove the app from the apps array
-  window.apps = window.apps.filter((app) => app.element !== element);
-}
-
-// Example `createWindow` function to create app windows
-function createWindow(title) {
-  const windowElement = document.createElement('div');
-  windowElement.className = 'window';
-  windowElement.style.position = 'absolute';
-  windowElement.style.width = '400px';
-  windowElement.style.height = '300px';
-  windowElement.style.border = '1px solid #666';
-  windowElement.style.backgroundColor = '#222';
-  windowElement.style.color = '#fff';
-  windowElement.style.borderRadius = '10px';
-  windowElement.style.padding = '10px';
-  windowElement.style.overflow = 'hidden';
-
-  const titleBar = document.createElement('div');
-  titleBar.className = 'title-bar';
-  titleBar.style.backgroundColor = '#333';
-  titleBar.style.padding = '5px';
-  titleBar.style.cursor = 'move';
-  titleBar.textContent = title;
-
-  const content = document.createElement('div');
-  content.className = 'window-content';
-  content.style.flex = '1';
-  content.style.padding = '5px';
-  content.style.overflow = 'auto';
-
-  windowElement.appendChild(titleBar);
-  windowElement.appendChild(content);
-  document.body.appendChild(windowElement);
-
-  // Make the window draggable
-  titleBar.onmousedown = (e) => {
-      const shiftX = e.clientX - windowElement.getBoundingClientRect().left;
-      const shiftY = e.clientY - windowElement.getBoundingClientRect().top;
-      document.onmousemove = (event) => {
-          windowElement.style.left = `${event.pageX - shiftX}px`;
-          windowElement.style.top = `${event.pageY - shiftY}px`;
-      };
-      document.onmouseup = () => {
-          document.onmousemove = null;
-          document.onmouseup = null;
-      };
-  };
-
-  return { element: windowElement, content };
 }
