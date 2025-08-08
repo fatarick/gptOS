@@ -1,7 +1,7 @@
 // Register the Task Manager application
 kernel.registerApp('taskmanager', 'Task Manager', function () {
   return createTaskManagerWindow();
-});
+}, 'assets/icons/activity.svg');
 
   w.element.style.resize = 'none'; // Disable resizing
   w.element.style.overflow = 'hidden'; // Prevent showing resize handles

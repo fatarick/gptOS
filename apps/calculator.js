@@ -1,6 +1,6 @@
 kernel.registerApp('calculator', 'Calculator', function () {
     return createCalculatorWindow();
-});
+}, 'assets/icons/calculator.svg');
 
 function createCalculatorWindow() {
     const w = createWindow("Calculator");

@@ -9,6 +9,18 @@ const clockLabel = document.getElementById('clock');
 const startMenuList = document.getElementById('start-menu-list');
 const contextMenu = document.getElementById('context-menu');
 
+function createIconElement(icon) {
+  const isImg = /\.(png|jpe?g|gif|svg)$/.test(icon) || icon.startsWith('http');
+  const el = document.createElement(isImg ? 'img' : 'i');
+  if (isImg) {
+    el.src = icon;
+  } else {
+    el.className = icon;
+  }
+  el.classList.add('app-icon');
+  return el;
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
   loadStartMenu();
   updateClock();
@@ -40,8 +52,13 @@ function loadStartMenu() {
   console.log("Loaded apps:", appsList);
   appsList.forEach(app=>{
     let li=document.createElement('li');
-    li.textContent=app.name;
     li.setAttribute('data-app-id',app.id);
+    if (app.icon) {
+      li.appendChild(createIconElement(app.icon));
+    }
+    let span=document.createElement('span');
+    span.textContent=app.name;
+    li.appendChild(span);
     li.onclick=(ev)=>{
       ev.stopPropagation();
       openApp(app.id);
@@ -63,6 +80,8 @@ function openApp(appId) {
     console.error("App did not return a valid window object:", appId);
     return;
   }
+  w.appName = appInfo.name;
+  w.appIcon = appInfo.icon;
   window.apps.push(w);
   updateTaskbar();
 }
@@ -71,7 +90,12 @@ function updateTaskbar() {
   runningApps.innerHTML='';
   for (let a of window.apps) {
     let btn=document.createElement('button');
-    btn.textContent=a.id;
+    if (a.appIcon) {
+      btn.appendChild(createIconElement(a.appIcon));
+    }
+    let span=document.createElement('span');
+    span.textContent=a.appName || a.id;
+    btn.appendChild(span);
     btn.onclick=()=>focusWindow(a);
     runningApps.appendChild(btn);
     a.button=btn;

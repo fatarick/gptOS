@@ -1,6 +1,6 @@
 kernel.registerApp('images', 'Images', function() {
     return createImagesWindow();
-});
+}, 'assets/icons/card-image.svg');
 
 function createImagesWindow() {
     const w = createWindow("Images");
