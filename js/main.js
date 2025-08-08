@@ -72,13 +72,24 @@ function updateTaskbar() {
   for (let a of window.apps) {
     let btn=document.createElement('button');
     btn.textContent=a.id;
-    btn.onclick=()=>focusWindow(a);
+    btn.onclick=()=>{
+      if (a.minimized) {
+        a.element.style.display='block';
+        a.minimized=false;
+        focusWindow(a);
+      } else {
+        focusWindow(a);
+      }
+      updateTaskbar();
+    };
+    if (a.minimized) btn.classList.add('minimized');
     runningApps.appendChild(btn);
     a.button=btn;
   }
 }
 
 function focusWindow(a) {
+  a.minimized=false;
   a.element.style.zIndex = ++zIndexCounter;
   a.element.style.display='block';
 }
@@ -87,7 +98,7 @@ function updateClock() {
   clockLabel.textContent=new Date().toLocaleTimeString();
 }
 
-function createWindow(title) {
+export function createWindow(title) {
   let w = document.createElement('div');
   w.className='window';
   w.style.top='100px';
@@ -106,7 +117,8 @@ function createWindow(title) {
   btnContainer.className='window-buttons';
 
   let minBtn=document.createElement('button');minBtn.textContent='–';
-  minBtn.onclick=(e)=>{w.style.display='none';};
+  let appRef; // will hold window object
+  minBtn.onclick=(e)=>{w.style.display='none'; appRef.minimized=true; updateTaskbar();};
   btnContainer.appendChild(minBtn);
 
   let maxBtn=document.createElement('button');maxBtn.textContent='□';
@@ -156,11 +168,16 @@ function createWindow(title) {
     document.removeEventListener('mouseup', upWin);
   }
 
-  return {id:title.toLowerCase()+':'+Math.random().toString(36).substr(2,5), element:w, content:content};
+  appRef = {id:title.toLowerCase()+':'+Math.random().toString(36).substr(2,5), element:w, content:content, minimized:false};
+  return appRef;
 }
 
-function closeAppByElement(el) {
+export function closeAppByElement(el) {
   window.apps=window.apps.filter(a=>a.element!==el);
   document.body.removeChild(el);
   updateTaskbar();
 }
+
+// Expose helpers globally for non-module scripts
+window.createWindow = createWindow;
+window.closeAppByElement = closeAppByElement;
