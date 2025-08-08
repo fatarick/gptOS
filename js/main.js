@@ -87,7 +87,7 @@ function updateClock() {
   clockLabel.textContent=new Date().toLocaleTimeString();
 }
 
-function createWindow(title) {
+export function createWindow(title) {
   let w = document.createElement('div');
   w.className='window';
   w.style.top='100px';
@@ -159,8 +159,12 @@ function createWindow(title) {
   return {id:title.toLowerCase()+':'+Math.random().toString(36).substr(2,5), element:w, content:content};
 }
 
-function closeAppByElement(el) {
+export function closeAppByElement(el) {
   window.apps=window.apps.filter(a=>a.element!==el);
   document.body.removeChild(el);
   updateTaskbar();
 }
+
+// Expose helpers globally for non-module scripts
+window.createWindow = createWindow;
+window.closeAppByElement = closeAppByElement;
