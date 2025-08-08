@@ -9,6 +9,18 @@ const clockLabel = document.getElementById('clock');
 const startMenuList = document.getElementById('start-menu-list');
 const contextMenu = document.getElementById('context-menu');
 
+function createIconElement(icon) {
+  const isImg = /\.(png|jpe?g|gif|svg)$/.test(icon) || icon.startsWith('http');
+  const el = document.createElement(isImg ? 'img' : 'i');
+  if (isImg) {
+    el.src = icon;
+  } else {
+    el.className = icon;
+  }
+  el.classList.add('app-icon');
+  return el;
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
   loadStartMenu();
   updateClock();
@@ -40,8 +52,13 @@ function loadStartMenu() {
   console.log("Loaded apps:", appsList);
   appsList.forEach(app=>{
     let li=document.createElement('li');
-    li.textContent=app.name;
     li.setAttribute('data-app-id',app.id);
+    if (app.icon) {
+      li.appendChild(createIconElement(app.icon));
+    }
+    let span=document.createElement('span');
+    span.textContent=app.name;
+    li.appendChild(span);
     li.onclick=(ev)=>{
       ev.stopPropagation();
       openApp(app.id);
@@ -63,6 +80,8 @@ function openApp(appId) {
     console.error("App did not return a valid window object:", appId);
     return;
   }
+  w.appName = appInfo.name;
+  w.appIcon = appInfo.icon;
   window.apps.push(w);
   updateTaskbar();
 }
@@ -71,14 +90,34 @@ function updateTaskbar() {
   runningApps.innerHTML='';
   for (let a of window.apps) {
     let btn=document.createElement('button');
-    btn.textContent=a.id;
+
+    if (a.appIcon) {
+      btn.appendChild(createIconElement(a.appIcon));
+    }
+    let span=document.createElement('span');
+    span.textContent=a.appName || a.id;
+    btn.appendChild(span);
     btn.onclick=()=>focusWindow(a);
+    btn.textContent=a.id;
+    btn.onclick=()=>{
+      if (a.minimized) {
+        a.element.style.display='block';
+        a.minimized=false;
+        focusWindow(a);
+      } else {
+        focusWindow(a);
+      }
+      updateTaskbar();
+    };
+    if (a.minimized) btn.classList.add('minimized');
+
     runningApps.appendChild(btn);
     a.button=btn;
   }
 }
 
 function focusWindow(a) {
+  a.minimized=false;
   a.element.style.zIndex = ++zIndexCounter;
   a.element.style.display='block';
 }
@@ -87,7 +126,7 @@ function updateClock() {
   clockLabel.textContent=new Date().toLocaleTimeString();
 }
 
-function createWindow(title) {
+export function createWindow(title) {
   let w = document.createElement('div');
   w.className='window';
   w.style.top='100px';
@@ -106,7 +145,8 @@ function createWindow(title) {
   btnContainer.className='window-buttons';
 
   let minBtn=document.createElement('button');minBtn.textContent='–';
-  minBtn.onclick=(e)=>{w.style.display='none';};
+  let appRef; // will hold window object
+  minBtn.onclick=(e)=>{w.style.display='none'; appRef.minimized=true; updateTaskbar();};
   btnContainer.appendChild(minBtn);
 
   let maxBtn=document.createElement('button');maxBtn.textContent='□';
@@ -156,11 +196,16 @@ function createWindow(title) {
     document.removeEventListener('mouseup', upWin);
   }
 
-  return {id:title.toLowerCase()+':'+Math.random().toString(36).substr(2,5), element:w, content:content};
+  appRef = {id:title.toLowerCase()+':'+Math.random().toString(36).substr(2,5), element:w, content:content, minimized:false};
+  return appRef;
 }
 
-function closeAppByElement(el) {
+export function closeAppByElement(el) {
   window.apps=window.apps.filter(a=>a.element!==el);
   document.body.removeChild(el);
   updateTaskbar();
 }
+
+// Expose helpers globally for non-module scripts
+window.createWindow = createWindow;
+window.closeAppByElement = closeAppByElement;

@@ -3,10 +3,10 @@
 /* 1. Global Styles & Modern Color Scheme using CSS Variables */
 :root {
   --background-url: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop');
-  --base-bg-color: rgba(25, 25, 30, 0.6);
-  --glass-bg-color: rgba(45, 45, 55, 0.7);
-  --hover-bg-color: rgba(70, 70, 85, 0.8);
-  --text-color: #f0f0f0;
+  --base-bg-color: rgba(233, 233, 233, 0.6);
+  --glass-bg-color: rgba(177, 177, 177, 0.7);
+  --hover-bg-color: rgba(94, 94, 94, 0.8);
+  --text-color: #000000;
   --accent-color: #0099ff;
   --border-color: rgba(255, 255, 255, 0.2);
   --shadow-color: rgba(0, 0, 0, 0.4);
@@ -81,11 +81,18 @@ body {
   border-radius: 8px;
   transition: all var(--transition-speed) ease;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 #running-apps button:hover {
   background: var(--hover-bg-color);
   border-color: var(--accent-color);
+}
+
+#running-apps button.minimized {
+  opacity: 0.5;
 }
 
 #clock {
@@ -123,10 +130,18 @@ body {
   border-radius: 8px;
   transition: background var(--transition-speed) ease;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #start-menu li:hover {
   background: var(--hover-bg-color);
+}
+
+.app-icon {
+  width: 16px;
+  height: 16px;
 }
 
 /* 4. Windows - Modern look, still resizable by default */
