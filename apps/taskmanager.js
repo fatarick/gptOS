@@ -3,12 +3,11 @@ kernel.registerApp('taskmanager', 'Task Manager', function () {
   return createTaskManagerWindow();
 });
 
-  w.element.style.resize = 'none'; // Disable resizing
-  w.element.style.overflow = 'hidden'; // Prevent showing resize handles
-
 // Create Task Manager Window
 function createTaskManagerWindow() {
   const w = createWindow("Task Manager");
+  w.element.style.resize = 'none'; // Disable resizing
+  w.element.style.overflow = 'hidden'; // Prevent showing resize handles
 
   // Create the list to display running apps
   const list = document.createElement('ul');

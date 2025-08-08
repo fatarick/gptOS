@@ -1,12 +1,11 @@
 kernel.registerApp('wallpaper','Wallpaper', function() {
     return createSettingsWindow();
   });
-  
-  w.element.style.resize = 'none'; // Disable resizing
-  w.element.style.overflow = 'hidden'; // Prevent showing resize handles
 
   function createSettingsWindow() {
     const w=createWindow("Wallpaper");
+    w.element.style.resize = 'none'; // Disable resizing
+    w.element.style.overflow = 'hidden'; // Prevent showing resize handles
   
     let desc=document.createElement('div');
     desc.textContent="Change Desktop Color:";
