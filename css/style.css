@@ -88,6 +88,10 @@ body {
   border-color: var(--accent-color);
 }
 
+#running-apps button.minimized {
+  opacity: 0.5;
+}
+
 #clock {
   color: var(--text-color);
   font-weight: 500;
