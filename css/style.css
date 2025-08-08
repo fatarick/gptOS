@@ -81,11 +81,18 @@ body {
   border-radius: 8px;
   transition: all var(--transition-speed) ease;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 #running-apps button:hover {
   background: var(--hover-bg-color);
   border-color: var(--accent-color);
+}
+
+#running-apps button.minimized {
+  opacity: 0.5;
 }
 
 #clock {
@@ -123,10 +130,18 @@ body {
   border-radius: 8px;
   transition: background var(--transition-speed) ease;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #start-menu li:hover {
   background: var(--hover-bg-color);
+}
+
+.app-icon {
+  width: 16px;
+  height: 16px;
 }
 
 /* 4. Windows - Modern look, still resizable by default */

@@ -1,6 +1,6 @@
 kernel.registerApp('about', 'About', function () {
     return createAboutWindow();
-});
+}, 'assets/icons/info-circle.svg');
 
 var version = "Beta";
 

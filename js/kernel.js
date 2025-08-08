@@ -2,8 +2,8 @@ window.appRegistry = [];
 var version = '1.2.2';
 
 window.kernel = {
-  registerApp: function(id, name, createFunc) {
-    window.appRegistry.push({ id, name, createFunc });
+  registerApp: function(id, name, createFunc, icon) {
+    window.appRegistry.push({ id, name, createFunc, icon });
   },
   getApps: function() {
     return window.appRegistry;

@@ -1,7 +1,7 @@
 // terminal.js
 kernel.registerApp('terminal', 'Terminal', function (shell) {
   return createTerminalWindow(shell);
-});
+}, 'assets/icons/terminal.svg');
 
 function createTerminalWindow(shell) {
   const w = createWindow("Terminal");
