@@ -1,6 +1,6 @@
 kernel.registerApp('fileexplorer', 'File Explorer', function (shell) {
   return createFileExplorerWindow(shell);
-});
+}, 'assets/icons/folder.svg');
 
 // Create File Explorer Window
 function createFileExplorerWindow(shell) {

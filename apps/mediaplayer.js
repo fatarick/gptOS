@@ -1,11 +1,14 @@
+import { createWindow } from '../js/main.js';
+
 // Register the Media Player app
 kernel.registerApp('mediaplayer', 'Media Player', function () {
     return createMediaPlayer();
-});
+}, 'assets/icons/play-circle.svg');
 
 function createMediaPlayer() {
     // Create window
     const w = createWindow("Media Player");
+    w.id = 'mediaplayer:' + Math.random().toString(36).substr(2, 5);
 
     w.element.style.resize = 'none'; // Disable resizing
     w.element.style.overflow = 'hidden'; // Prevent showing resize handles
@@ -62,82 +65,5 @@ function createMediaPlayer() {
     w.content.appendChild(container);
 
     // Return the window object
-    const id = 'mediaplayer:' + Math.random().toString(36).substr(2, 5);
-    return { id, element: w.element };
-}
-
-// Create a window with title and content
-function createWindow(title) {
-    const windowElement = document.createElement('div');
-    windowElement.className = 'window';
-    windowElement.style.position = 'absolute';
-    windowElement.style.background = 'rgba(34, 34, 34, 0.8)';
-    windowElement.style.border = '1px solid rgba(68, 68, 68, 0.5)';
-    windowElement.style.width = '400px';
-    windowElement.style.height = '300px';
-    windowElement.style.resize = 'both';
-    windowElement.style.overflow = 'hidden';
-    windowElement.style.borderRadius = '10px';
-    windowElement.style.backdropFilter = 'blur(15px)';
-    windowElement.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.5)';
-    windowElement.style.display = 'flex';
-    windowElement.style.flexDirection = 'column';
-
-    // Title bar
-    const titleBar = document.createElement('div');
-    titleBar.className = 'title-bar';
-    titleBar.style.height = '30px';
-    titleBar.style.background = 'rgba(51, 51, 51, 0.9)';
-    titleBar.style.color = 'white';
-    titleBar.style.display = 'flex';
-    titleBar.style.alignItems = 'center';
-    titleBar.style.padding = '0 5px';
-    titleBar.style.boxSizing = 'border-box';
-    titleBar.style.cursor = 'move';
-    titleBar.style.gap = '10px'; // Adds spacing between elements
-
-    const titleText = document.createElement('div');
-    titleText.className = 'title-text';
-    titleText.textContent = title;
-    titleText.style.flex = 'none';
-
-    const windowButtons = document.createElement('div');
-    windowButtons.className = 'window-buttons';
-    windowButtons.style.display = 'flex';
-    windowButtons.style.alignItems = 'center';
-    windowButtons.style.justifyContent = 'flex-end';
-
-    const closeButton = document.createElement('button');
-    closeButton.textContent = '✖';
-    closeButton.style.background = 'none';
-    closeButton.style.color = 'white';
-    closeButton.style.border = 'none';
-    closeButton.style.cursor = 'pointer';
-    closeButton.style.width = '24px';
-    closeButton.style.height = '24px';
-    closeButton.addEventListener('click', () => {
-        windowElement.remove();
-    });
-    windowButtons.appendChild(closeButton);
-
-    // Append title bar elements
-    titleBar.appendChild(titleText);
-    titleBar.appendChild(windowButtons);
-
-    // Content area
-    const content = document.createElement('div');
-    content.className = 'window-content';
-    content.style.flex = '1';
-    content.style.padding = '5px';
-    content.style.overflow = 'auto';
-    content.style.boxSizing = 'border-box';
-
-    // Append title bar and content to the window
-    windowElement.appendChild(titleBar);
-    windowElement.appendChild(content);
-
-    // Append the window to the document body
-    document.body.appendChild(windowElement);
-
-    return { element: windowElement, content };
+    return w;
 }

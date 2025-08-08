@@ -1,6 +1,6 @@
 kernel.registerApp('wallpaper','Wallpaper', function() {
     return createSettingsWindow();
-  });
+  }, 'assets/icons/image.svg');
   
   w.element.style.resize = 'none'; // Disable resizing
   w.element.style.overflow = 'hidden'; // Prevent showing resize handles

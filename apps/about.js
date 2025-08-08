@@ -1,10 +1,10 @@
 kernel.registerApp('about', 'About', function () {
     return createAboutWindow();
-});
+ }, 'assets/icons/info-circle.svg');
 
-var version = "3.2.2";
-var build = "19";
-var kernelVer = "2.2.2";
+var version = "4.0";
+var build = "21";
+var kernelVer = "3.0";
 
 function createAboutWindow() {
     const w = createWindow("About");
