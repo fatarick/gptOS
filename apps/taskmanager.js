@@ -3,7 +3,7 @@ import { createWindow, closeAppByElement } from '../js/main.js';
 // Register the Task Manager application
 kernel.registerApp('taskmanager', 'Task Manager', function () {
   return createTaskManagerWindow();
-});
+}, 'assets/icons/activity.svg');
 
 // Create Task Manager Window
 function createTaskManagerWindow() {

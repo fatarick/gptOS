@@ -1,6 +1,6 @@
 kernel.registerApp('calculator', 'Calculator', function () {
     return createCalculatorWindow();
-});
+}, 'assets/icons/calculator.svg');
 
 function evaluateExpression(expr) {
     if (!/^[0-9+\-*/.]+$/.test(expr)) {

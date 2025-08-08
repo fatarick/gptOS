@@ -1,6 +1,6 @@
 kernel.registerApp('texteditor', 'Text Editor', function (filePath = null, content = '') {
     return createTextEditor(filePath, content);
-});
+}, 'assets/icons/file-earmark-text.svg');
 
 // Create Text Editor Window
 function createTextEditor(filePath = null, content = '') {

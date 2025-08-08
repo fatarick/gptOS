@@ -3,7 +3,7 @@ import { createWindow } from '../js/main.js';
 // Register the Media Player app
 kernel.registerApp('mediaplayer', 'Media Player', function () {
     return createMediaPlayer();
-});
+}, 'assets/icons/play-circle.svg');
 
 function createMediaPlayer() {
     // Create window
